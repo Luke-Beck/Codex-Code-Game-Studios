@@ -7,8 +7,8 @@ This file is gitignored and will not be committed.
 # Personal Preferences
 
 ## Model Preferences
-- Prefer GPT-5 for complex design tasks
-- Use GPT-5 mini for quick lookups and simple edits
+- Prefer GPT 5.4 for complex design tasks
+- Use GPT 5.4 mini for quick lookups and simple edits
 
 ## Workflow Preferences
 - Always run tests after code changes
