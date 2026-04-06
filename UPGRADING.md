@@ -1,4 +1,4 @@
-# Upgrading Claude Code Game Studios
+# Upgrading Codex Code Game Studios
 
 This guide covers upgrading your existing game project repo from one version
 of the template to the next.
@@ -30,7 +30,7 @@ Best when: you cloned the template and have your own commits on top of it.
 
 ```bash
 # Add the template as a remote (one-time setup)
-git remote add template https://github.com/Donchitos/Claude-Code-Game-Studios.git
+git remote add template https://github.com/Donchitos/Codex-Code-Game-Studios.git
 
 # Fetch the new version
 git fetch template main
@@ -43,8 +43,8 @@ Git will flag conflicts only in files that both the template *and* you have
 changed. Resolve each one — your game content goes in, structural improvements
 come along for the ride. Then commit the merge.
 
-**Tip:** The files most likely to conflict are `CLAUDE.md` and
-`.claude/docs/technical-preferences.md`, because you've filled them in with
+**Tip:** The files most likely to conflict are `AGENTS.md` and
+`.codex/docs/technical-preferences.md`, because you've filled them in with
 your engine and project settings. Keep your content; accept the structural changes.
 
 ---
@@ -55,7 +55,7 @@ Best when: you only want one specific feature (e.g., just the new skill, not
 the full update).
 
 ```bash
-git remote add template https://github.com/Donchitos/Claude-Code-Game-Studios.git
+git remote add template https://github.com/Donchitos/Codex-Code-Game-Studios.git
 git fetch template main
 
 # Cherry-pick the specific commit(s) you want
@@ -99,7 +99,7 @@ The `/design-systems` skill was renamed to `/map-systems` for clarity
 |----------|---------|
 | **New skills** | `/design-system` (guided GDD authoring, section-by-section) |
 | **Renamed skills** | `/design-systems` → `/map-systems` (breaking rename) |
-| **New files** | `.claude/statusline.sh`, `.claude/settings.json` statusline config |
+| **New files** | `.codex/statusline.sh`, `.codex/settings.json` statusline config |
 | **Skill updates** | `/gate-check` — writes `production/stage.txt` on PASS, new phase definitions |
 | **Skill updates** | `brainstorm`, `start`, `design-review`, `project-stage-detect`, `setup-engine` — cross-reference fixes |
 | **Bug fixes** | `log-agent.sh`, `validate-commit.sh` — hook execution fixed |
@@ -111,21 +111,21 @@ The `/design-systems` skill was renamed to `/map-systems` for clarity
 
 **New files to add:**
 ```
-.claude/skills/design-system/SKILL.md
-.claude/statusline.sh
+.codex/skills/design-system/SKILL.md
+.codex/statusline.sh
 ```
 
 **Existing files to overwrite (no user content):**
 ```
-.claude/skills/map-systems/SKILL.md      ← was design-systems/SKILL.md
-.claude/skills/gate-check/SKILL.md
-.claude/skills/brainstorm/SKILL.md
-.claude/skills/start/SKILL.md
-.claude/skills/design-review/SKILL.md
-.claude/skills/project-stage-detect/SKILL.md
-.claude/skills/setup-engine/SKILL.md
-.claude/hooks/log-agent.sh
-.claude/hooks/validate-commit.sh
+.codex/skills/map-systems/SKILL.md      ← was design-systems/SKILL.md
+.codex/skills/gate-check/SKILL.md
+.codex/skills/brainstorm/SKILL.md
+.codex/skills/start/SKILL.md
+.codex/skills/design-review/SKILL.md
+.codex/skills/project-stage-detect/SKILL.md
+.codex/skills/setup-engine/SKILL.md
+.codex/hooks/log-agent.sh
+.codex/hooks/validate-commit.sh
 README.md
 docs/WORKFLOW-GUIDE.md
 UPGRADING.md
@@ -133,22 +133,22 @@ UPGRADING.md
 
 **Delete (replaced by rename):**
 ```
-.claude/skills/design-systems/   ← entire directory; replaced by map-systems/
+.codex/skills/design-systems/   ← entire directory; replaced by map-systems/
 ```
 
 ---
 
 ### Files: Merge Carefully
 
-#### `.claude/settings.json`
+#### `.codex/settings.json`
 
 The new version adds a `statusLine` configuration block pointing to
-`.claude/statusline.sh`. If you haven't customized `settings.json`, overwriting
+`.codex/statusline.sh`. If you haven't customized `settings.json`, overwriting
 is safe. Otherwise, add this block manually:
 
 ```json
 "statusLine": {
-  "script": ".claude/statusline.sh"
+  "script": ".codex/statusline.sh"
 }
 ```
 
@@ -158,18 +158,18 @@ is safe. Otherwise, add this block manually:
 
 #### Custom Status Line
 
-`.claude/statusline.sh` displays a 7-stage production pipeline breadcrumb in
+`.codex/statusline.sh` displays a 7-stage production pipeline breadcrumb in
 the terminal status line:
 
 ```
-ctx: 42% | claude-sonnet-4-6 | Systems Design
+ctx: 42% | gpt-5.4 | Systems Design
 ```
 
 In Production/Polish/Release stages, it also shows the active Epic/Feature/Task
 from `production/session-state/active.md` if a `<!-- STATUS -->` block is present:
 
 ```
-ctx: 42% | claude-sonnet-4-6 | Production | Combat System > Melee Combat > Hitboxes
+ctx: 42% | gpt-5.4 | Production | Combat System > Melee Combat > Hitboxes
 ```
 
 The current stage is auto-detected from project artifacts, or can be pinned by
@@ -187,16 +187,16 @@ future sessions without requiring manual file edits.
 
 1. **Delete the old skill directory:**
    ```bash
-   rm -rf .claude/skills/design-systems/
+   rm -rf .codex/skills/design-systems/
    ```
 
-2. **Test the status line** by starting a Claude Code session — you should see
+2. **Test the status line** by starting a Codex session — you should see
    the stage breadcrumb in the terminal footer.
 
 3. **Verify hook execution** still works:
    ```bash
-   bash .claude/hooks/log-agent.sh '{}' '{}'
-   bash .claude/hooks/validate-commit.sh '{}' '{}'
+   bash .codex/hooks/log-agent.sh '{}' '{}'
+   bash .codex/hooks/validate-commit.sh '{}' '{}'
    ```
 
 ---
@@ -217,7 +217,7 @@ future sessions without requiring manual file edits.
 | **Context management** | Major rewrite — file-backed state strategy added |
 | **Agent updates** | 14 design/creative agents — AskUserQuestion integration |
 | **Skill updates** | All 7 `team-*` skills + `brainstorm` — AskUserQuestion at phase transitions |
-| **CLAUDE.md** | Slimmed from ~159 to ~60 lines; 5 doc imports instead of 10 |
+| **AGENTS.md** | Slimmed from ~159 to ~60 lines; 5 doc imports instead of 10 |
 | **Hook updates** | All 8 hooks — Windows compatibility fixes, new features |
 | **Docs removed** | `docs/IMPROVEMENTS-PROPOSAL.md`, `docs/MULTI-STAGE-DOCUMENT-WORKFLOW.md` |
 
@@ -230,15 +230,15 @@ versions directly with no risk to your project content.
 
 **New files to add:**
 ```
-.claude/skills/start/SKILL.md
-.claude/skills/map-systems/SKILL.md
-.claude/skills/design-system/SKILL.md
-.claude/docs/templates/systems-index.md
-.claude/docs/templates/collaborative-protocols/design-agent-protocol.md
-.claude/docs/templates/collaborative-protocols/implementation-agent-protocol.md
-.claude/docs/templates/collaborative-protocols/leadership-agent-protocol.md
-.claude/hooks/detect-gaps.sh
-.claude/hooks/session-start.sh
+.codex/skills/start/SKILL.md
+.codex/skills/map-systems/SKILL.md
+.codex/skills/design-system/SKILL.md
+.codex/docs/templates/systems-index.md
+.codex/docs/templates/collaborative-protocols/design-agent-protocol.md
+.codex/docs/templates/collaborative-protocols/implementation-agent-protocol.md
+.codex/docs/templates/collaborative-protocols/leadership-agent-protocol.md
+.codex/hooks/detect-gaps.sh
+.codex/hooks/session-start.sh
 production/session-state/.gitkeep
 docs/examples/README.md
 .github/ISSUE_TEMPLATE/bug_report.md
@@ -248,30 +248,30 @@ docs/examples/README.md
 
 **Existing files to overwrite (no user content):**
 ```
-.claude/skills/brainstorm/SKILL.md
-.claude/skills/design-review/SKILL.md
-.claude/skills/gate-check/SKILL.md
-.claude/skills/project-stage-detect/SKILL.md
-.claude/skills/setup-engine/SKILL.md
-.claude/skills/team-audio/SKILL.md
-.claude/skills/team-combat/SKILL.md
-.claude/skills/team-level/SKILL.md
-.claude/skills/team-narrative/SKILL.md
-.claude/skills/team-polish/SKILL.md
-.claude/skills/team-release/SKILL.md
-.claude/skills/team-ui/SKILL.md
-.claude/hooks/log-agent.sh
-.claude/hooks/pre-compact.sh
-.claude/hooks/session-stop.sh
-.claude/hooks/validate-assets.sh
-.claude/hooks/validate-commit.sh
-.claude/hooks/validate-push.sh
-.claude/rules/design-docs.md
-.claude/docs/hooks-reference.md
-.claude/docs/skills-reference.md
-.claude/docs/quick-start.md
-.claude/docs/directory-structure.md
-.claude/docs/context-management.md
+.codex/skills/brainstorm/SKILL.md
+.codex/skills/design-review/SKILL.md
+.codex/skills/gate-check/SKILL.md
+.codex/skills/project-stage-detect/SKILL.md
+.codex/skills/setup-engine/SKILL.md
+.codex/skills/team-audio/SKILL.md
+.codex/skills/team-combat/SKILL.md
+.codex/skills/team-level/SKILL.md
+.codex/skills/team-narrative/SKILL.md
+.codex/skills/team-polish/SKILL.md
+.codex/skills/team-release/SKILL.md
+.codex/skills/team-ui/SKILL.md
+.codex/hooks/log-agent.sh
+.codex/hooks/pre-compact.sh
+.codex/hooks/session-stop.sh
+.codex/hooks/validate-assets.sh
+.codex/hooks/validate-commit.sh
+.codex/hooks/validate-push.sh
+.codex/rules/design-docs.md
+.codex/docs/hooks-reference.md
+.codex/docs/skills-reference.md
+.codex/docs/quick-start.md
+.codex/docs/directory-structure.md
+.codex/docs/context-management.md
 docs/COLLABORATIVE-DESIGN-PRINCIPLE.md
 docs/WORKFLOW-GUIDE.md
 README.md
@@ -279,20 +279,20 @@ README.md
 
 **Agent files to overwrite** (if you haven't written custom prompts into them):
 ```
-.claude/agents/art-director.md
-.claude/agents/audio-director.md
-.claude/agents/creative-director.md
-.claude/agents/economy-designer.md
-.claude/agents/game-designer.md
-.claude/agents/level-designer.md
-.claude/agents/live-ops-designer.md
-.claude/agents/narrative-director.md
-.claude/agents/producer.md
-.claude/agents/systems-designer.md
-.claude/agents/technical-director.md
-.claude/agents/ux-designer.md
-.claude/agents/world-builder.md
-.claude/agents/writer.md
+.codex/agents/art-director.md
+.codex/agents/audio-director.md
+.codex/agents/creative-director.md
+.codex/agents/economy-designer.md
+.codex/agents/game-designer.md
+.codex/agents/level-designer.md
+.codex/agents/live-ops-designer.md
+.codex/agents/narrative-director.md
+.codex/agents/producer.md
+.codex/agents/systems-designer.md
+.codex/agents/technical-director.md
+.codex/agents/ux-designer.md
+.codex/agents/world-builder.md
+.codex/agents/writer.md
 ```
 
 If you *have* customized agent prompts, see "Merge carefully" below.
@@ -304,11 +304,11 @@ If you *have* customized agent prompts, see "Merge carefully" below.
 These files contain both template structure and your project-specific content.
 Do **not** overwrite them — merge the changes manually.
 
-#### `CLAUDE.md`
+#### `AGENTS.md`
 
 The template version was slimmed from ~159 lines to ~60 lines. The key
 structural change: 5 doc imports were removed because they're auto-loaded
-by Claude Code anyway (agent-roster, skills-reference, hooks-reference,
+by Codex anyway (agent-roster, skills-reference, hooks-reference,
 rules-reference, review-workflow).
 
 **What to keep from your version:**
@@ -319,19 +319,19 @@ rules-reference, review-workflow).
 - Slimmer imports list (drop the 5 redundant `@` imports if present)
 - Updated collaboration protocol wording
 
-#### `.claude/docs/technical-preferences.md`
+#### `.codex/docs/technical-preferences.md`
 
 If you ran `/setup-engine`, this file has your engine config, naming
 conventions, and performance budgets. Keep all of it. The template version
 is just the empty placeholder.
 
-#### `.claude/docs/templates/game-concept.md`
+#### `.codex/docs/templates/game-concept.md`
 
 Minor structural update — a `## Next Steps` section was added pointing to
 `/map-systems`. Add that section to your copy if you want the updated
 guidance, but it's not required.
 
-#### `.claude/settings.json`
+#### `.codex/settings.json`
 
 Check whether the new version adds any permission rules you want. The change
 was minor (schema update). If you haven't customized your `settings.json`,
@@ -375,8 +375,8 @@ docs/MULTI-STAGE-DOCUMENT-WORKFLOW.md → content merged into context-management
 4. **Test hook execution** — if you're on Windows, verify the new hooks run
    without errors in Git Bash:
    ```bash
-   bash .claude/hooks/detect-gaps.sh '{}' '{}'
-   bash .claude/hooks/session-start.sh '{}' '{}'
+   bash .codex/hooks/detect-gaps.sh '{}' '{}'
+   bash .codex/hooks/session-start.sh '{}' '{}'
    ```
 
 ---
