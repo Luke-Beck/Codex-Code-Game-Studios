@@ -1,7 +1,7 @@
 <p align="center">
-  <h1 align="center">Claude Code Game Studios</h1>
+  <h1 align="center">Codex Code Game Studios</h1>
   <p align="center">
-    Turn a single Claude Code session into a full game development studio.
+    Turn a single Codex session into a full game development studio.
     <br />
     48 agents. 37 workflows. One coordinated AI team.
   </p>
@@ -9,11 +9,11 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-48-blueviolet" alt="48 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-37-green" alt="37 Skills"></a>
-  <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-8-orange" alt="8 Hooks"></a>
-  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
-  <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
+  <a href=".codex/agents"><img src="https://img.shields.io/badge/agents-48-blueviolet" alt="48 Agents"></a>
+  <a href=".codex/skills"><img src="https://img.shields.io/badge/skills-37-green" alt="37 Skills"></a>
+  <a href=".codex/hooks"><img src="https://img.shields.io/badge/hooks-8-orange" alt="8 Hooks"></a>
+  <a href=".codex/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
+  <a href="https://developers.openai.com/codex/"><img src="https://img.shields.io/badge/built%20for-Codex-f5f5f5" alt="Built for Codex"></a>
   <a href="https://ko-fi.com/donchitos"><img src="https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
@@ -23,7 +23,7 @@
 
 Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+**Codex Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
 
 The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
 
@@ -61,15 +61,15 @@ The result: you still make every decision, but now you have a team that asks the
 Agents are organized into three tiers, matching how real studios operate:
 
 ```
-Tier 1 — Directors (Opus)
+Tier 1 — Directors (GPT-5)
   creative-director    technical-director    producer
 
-Tier 2 — Department Leads (Sonnet)
+Tier 2 — Department Leads (GPT-5)
   game-designer        lead-programmer       art-director
   audio-director       narrative-director    qa-lead
   release-manager      localization-lead
 
-Tier 3 — Specialists (Sonnet/Haiku)
+Tier 3 — Specialists (GPT-5 / GPT-5 mini)
   gameplay-programmer  engine-programmer     ai-programmer
   network-programmer   tools-programmer      ui-programmer
   systems-designer     level-designer        economy-designer
@@ -92,7 +92,7 @@ The template includes agent sets for all three major engines. Use the set that m
 
 ## Slash Commands
 
-Type `/` in Claude Code to access all 37 skills:
+Type `/` in Codex to access all 37 skills:
 
 **Reviews & Analysis**
 `/design-review` `/code-review` `/balance-check` `/asset-audit` `/scope-check` `/perf-profile` `/tech-debt`
@@ -117,7 +117,7 @@ Type `/` in Claude Code to access all 37 skills:
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
+- [Codex](https://developers.openai.com/codex/) (`npm install -g @openai/codex`)
 - **Recommended**: [jq](https://jqlang.github.io/jq/) (for hook validation) and Python 3 (for JSON validation)
 
 All hooks fail gracefully if optional tools are missing — nothing breaks, you just lose validation.
@@ -126,14 +126,18 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
 
 1. **Clone or use as template**:
    ```bash
-   git clone https://github.com/Donchitos/Claude-Code-Game-Studios.git my-game
+   git clone https://github.com/Donchitos/Codex-Code-Game-Studios.git my-game
    cd my-game
    ```
 
-2. **Open Claude Code** and start a session:
+2. **Open Codex** and start a session:
    ```bash
-   claude
+   codex
    ```
+
+   Codex reads `AGENTS.md` from the project root. The `.codex/` directory holds
+   the supporting workflow prompts, reference docs, rules, and helper scripts
+   that power the template.
 
 3. **Run `/start`** — the system asks where you are (no idea, vague concept,
    clear design, existing work) and guides you to the right workflow. No assumptions.
@@ -152,8 +156,8 @@ versions, and which files are safe to overwrite vs. which need a manual merge.
 ## Project Structure
 
 ```
-CLAUDE.md                           # Master configuration
-.claude/
+AGENTS.md                           # Master configuration
+.codex/
   settings.json                     # Hooks, permissions, safety rules
   agents/                           # 48 agent definitions (markdown + YAML frontmatter)
   skills/                           # 37 slash commands (subdirectory per skill)
@@ -201,7 +205,7 @@ You stay in control. The agents provide structure and expertise, not autonomy.
 
 ### Automated Safety
 
-**Hooks** run automatically on every session:
+**Hooks** in `.codex/hooks/` provide the automation layer for this template:
 
 | Hook | Trigger | What It Does |
 |------|---------|--------------|
@@ -214,7 +218,8 @@ You stay in control. The agents provide structure and expertise, not autonomy.
 | `session-stop.sh` | Session close | Logs accomplishments |
 | `log-agent.sh` | Agent spawned | Audit trail of all subagent invocations |
 
-**Permission rules** in `settings.json` auto-allow safe operations (git status, test runs) and block dangerous ones (force push, `rm -rf`, reading `.env` files).
+**Permission rules** in `.codex/settings.json` document the recommended safe
+defaults for status checks, test runs, and dangerous-command blocking.
 
 ### Path-Scoped Rules
 
@@ -258,8 +263,8 @@ Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns 
 
 ## Community
 
-- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
-- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Claude-Code-Game-Studios/issues)
+- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Codex-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
+- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Codex-Code-Game-Studios/issues)
 
 ---
 
