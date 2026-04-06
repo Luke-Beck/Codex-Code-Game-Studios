@@ -61,15 +61,15 @@ The result: you still make every decision, but now you have a team that asks the
 Agents are organized into three tiers, matching how real studios operate:
 
 ```
-Tier 1 — Directors (GPT-5)
+Tier 1 — Directors (GPT 5.4)
   creative-director    technical-director    producer
 
-Tier 2 — Department Leads (GPT-5)
+Tier 2 — Department Leads (GPT 5.4)
   game-designer        lead-programmer       art-director
   audio-director       narrative-director    qa-lead
   release-manager      localization-lead
 
-Tier 3 — Specialists (GPT-5 / GPT-5 mini)
+Tier 3 — Specialists (GPT 5.4 / GPT 5.4 mini)
   gameplay-programmer  engine-programmer     ai-programmer
   network-programmer   tools-programmer      ui-programmer
   systems-designer     level-designer        economy-designer
