@@ -126,7 +126,7 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
 
 1. **Clone or use as template**:
    ```bash
-   git clone https://github.com/Donchitos/Codex-Code-Game-Studios.git my-game
+   git clone https://github.com/Luke-Beck/Codex-Code-Game-Studios.git my-game
    cd my-game
    ```
 
@@ -263,8 +263,8 @@ Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns 
 
 ## Community
 
-- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Codex-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
-- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Codex-Code-Game-Studios/issues)
+- **Discussions** — [GitHub Discussions](https://github.com/Luke-Beck/Codex-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
+- **Issues** — [Bug reports and feature requests](https://github.com/Luke-Beck/Codex-Code-Game-Studios/issues)
 
 ---
 
